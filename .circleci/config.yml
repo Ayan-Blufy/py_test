@@ -4,6 +4,7 @@ jobs:
   build:
     docker:
       - image: cimg/python:3.11
+    resource_class: small
     steps:
       - checkout
       - run: python main.py
@@ -26,9 +27,3 @@ workflows:
       - test:
           requires:
             - build 
-      - deploy:
-          requires:
-            - test
-          filters:
-            branches:
-              only: main
