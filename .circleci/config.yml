@@ -15,8 +15,8 @@ jobs:
       - checkout
       - run:
           name: Run tests
-          command: python tests.py &&  mkdir -p test-results &&             python -m unittest discover -s tests -p "*.py" > test-results/results.log || true
-            python -m unittest discover -s tests -p "*.py" > test-results/results.log || true
+          command: python tests.py &&  mkdir -p test-results && python -m unittest discover -s tests -p "*.py" > test-results/results.log || true
+          
 
       - store_test_results:
           path: test-results
