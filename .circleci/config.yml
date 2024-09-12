@@ -3,11 +3,14 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/python:3.11
+      - image: cimg/base:2022.09
+    environment:
+      FOO: bar
+    parallelism: 3
     resource_class: small
+    working_directory: ~/my-app
     steps:
-      - checkout
-      - run: python main.py
+       - run : echo "Building the app"
   test:
     docker:
       - image: cimg/python:3.11
@@ -16,9 +19,7 @@ jobs:
       - run:
           name: Run tests
           command: python tests.py
-      - run:
-          name: List files
-          command: ls -al /home/circleci/project
+
       - store_test_results:
           path: test-results
   deploy:
