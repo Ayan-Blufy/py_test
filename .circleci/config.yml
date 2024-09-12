@@ -13,9 +13,14 @@ jobs:
       - image: cimg/python:3.11
     steps:
       - checkout
-      - run: python tests.py
+      - run:
+          name: Run tests
+          command: python tests.py
+      - run:
+          name: List files
+          command: ls -al /home/circleci/project
       - store_test_results:
-         path: test-results
+          path: test-results
   deploy:
     docker:
       - image: cimg/python:3.11
