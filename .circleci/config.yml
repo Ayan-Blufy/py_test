@@ -3,14 +3,11 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/base:2022.09
-    environment:
-      FOO: bar
-    parallelism: 3
+      - image: cimg/python:3.11
     resource_class: small
-    working_directory: ~/my-app
     steps:
-       - run : echo "Building the app"
+      - checkout
+      - run: python main.py
   test:
     docker:
       - image: cimg/python:3.11
@@ -18,8 +15,7 @@ jobs:
       - checkout
       - run:
           name: Run tests
-          command: python tests.py
-
+          command: python tests.py &&  mkdir -p test-results
       - store_test_results:
           path: test-results
   deploy:
